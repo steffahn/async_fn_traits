@@ -1,22 +1,56 @@
 #![no_std]
 #![forbid(unsafe_code)]
+// reasonable clippy categories
 #![warn(clippy::pedantic, clippy::nursery, clippy::cargo)]
-// reasonable restriction lints
+// reasonable clippy::restriction lints
 #![warn(
+    clippy::as_conversions,
     clippy::clone_on_ref_ptr,
+    clippy::create_dir,
+    clippy::dbg_macro,
+    clippy::decimal_literal_representation,
+    clippy::default_numeric_fallback,
+    clippy::else_if_without_else,
+    clippy::exhaustive_enums,
+    clippy::exhaustive_structs,
+    clippy::exit,
+    clippy::expect_used,
+    clippy::filetype_is_file,
     clippy::float_arithmetic,
     clippy::float_cmp_const,
+    clippy::get_unwrap,
+    clippy::if_then_some_else_none,
+    clippy::indexing_slicing,
     clippy::integer_arithmetic,
+    clippy::integer_division,
+    clippy::let_underscore_must_use,
+    clippy::lossy_float_literal,
+    clippy::map_err_ignore,
     clippy::mem_forget,
     clippy::missing_docs_in_private_items,
     clippy::missing_inline_in_public_items,
+    clippy::modulo_arithmetic,
     clippy::multiple_inherent_impl,
-    clippy::unwrap_used,
+    clippy::panic,
+    clippy::panic_in_result_fn,
+    clippy::pattern_type_mismatch,
+    clippy::print_stderr,
     clippy::print_stdout,
-    clippy::shadow_unrelated,
+    clippy::rc_buffer,
+    clippy::rest_pat_in_fully_bound_structs,
+    clippy::str_to_string,
     clippy::string_add,
+    clippy::string_to_string,
+    clippy::todo,
     clippy::unimplemented,
-    clippy::use_debug
+    clippy::unnecessary_self_imports,
+    clippy::unneeded_field_pattern,
+    clippy::unreachable,
+    clippy::unwrap_in_result,
+    clippy::unwrap_used,
+    clippy::use_debug,
+    clippy::verbose_file_reads,
+    clippy::wildcard_enum_match_arm
 )]
 // reasonable rustc lints
 #![warn(
@@ -43,6 +77,13 @@
     unused_qualifications,
     unused_results,
     variant_size_differences
+)]
+// reasonable rustdoc lints
+#![warn(
+    rustdoc::missing_crate_level_docs,
+    rustdoc::missing_doc_code_examples,
+    rustdoc::private_doc_tests,
+    rustdoc::invalid_html_tags
 )]
 
 //! [![crates.io]](https://crates.io/crates/template_crate)
