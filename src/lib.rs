@@ -28,7 +28,6 @@
     clippy::map_err_ignore,
     clippy::mem_forget,
     clippy::missing_docs_in_private_items,
-    clippy::missing_inline_in_public_items,
     clippy::modulo_arithmetic,
     clippy::multiple_inherent_impl,
     clippy::panic,
