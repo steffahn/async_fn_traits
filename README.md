@@ -15,7 +15,7 @@
 Trait synonyms for `Fn[…]`-trait bounds returning futures.
 
 E.g. a 2-argument function `async fn foo(x: Bar, y: Baz) -> Qux` will implement
-<code>[AsyncFn2](https://docs.rs/async_fn_traits/0.1/async_fn_traits/AsyncFn2)<Bar, Baz, Output = Qux></code>.
+<code>[AsyncFn2](https://docs.rs/async_fn_traits/0.1/async_fn_traits/trait.AsyncFn2.html)<Bar, Baz, Output = Qux></code>.
 
 _TODO: this crate is still not fully documented._
 
