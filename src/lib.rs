@@ -122,13 +122,13 @@ macro_rules! define_async_fn_traits {
     };
     ([$($FNTYPE:ident)?][$($I:literal)*] $N:literal $($J:literal)*) => {
         paste!{
-            trait [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*>
-                : [<Fn $($FNTYPE)?>]($([<Arg $I>]),*) -> <Self as [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*>>::OutputFuture
+            pub trait [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*>
+                : [<Fn $($FNTYPE)?>]($([<Arg $I>]),*) -> <Self as [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*>>::OutputFuture
             {
-                type OutputFuture: Future<Output = <Self as [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*>>::Output>;
+                type OutputFuture: Future<Output = <Self as [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*>>::Output>;
                 type Output;
             }
-            impl<F: ?Sized, Fut, $([<Arg $I>]),*> [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*> for F
+            impl<F: ?Sized, Fut, $([<Arg $I>]),*> [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*> for F
             where
                 F: [<Fn $($FNTYPE)?>]($([<Arg $I>]),*) -> Fut,
                 Fut: Future,
