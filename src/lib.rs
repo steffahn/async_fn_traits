@@ -128,7 +128,7 @@ macro_rules! define_async_fn_traits {
             #[doc = "```no_run"]
             #[doc = "# use async_fn_traits::*;"]
             #[doc = "# fn _f<F: ?Sized, R, "$([<Arg $I>])", "*">() where"]
-            #[doc = "F: AsyncFn"$($FNTYPE)?$N"<"$([<Arg $I>]", ")*"Output = R>"]
+            #[doc = "F: AsyncFn"$($FNTYPE)?$N"<"$([<Arg $I>]", ")*"Output = R>,"]
             #[doc = "# {}"]
             #[doc = "```"]
             #[doc = "is equivalent to something like"]
