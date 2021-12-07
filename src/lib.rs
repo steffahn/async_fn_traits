@@ -84,13 +84,12 @@
     rustdoc::private_doc_tests,
     rustdoc::invalid_html_tags
 )]
+#![allow(clippy::doc_markdown)]
 
 //! [![crates.io]](https://crates.io/crates/async_fn_traits)
 //! [![github]](https://github.com/steffahn/async_fn_traits)
 //! [![MIT / Apache 2.0 licensed]](https://github.com/steffahn/async_fn_traits#License)
 //! [![unsafe forbidden]](https://github.com/rust-secure-code/safety-dance/)
-//!
-//! Module-level documentation goes here!!
 //!
 //! [github]: https://img.shields.io/badge/github-steffahn/async__fn__traits-yellowgreen.svg
 //! [crates.io]: https://img.shields.io/crates/v/async_fn_traits.svg
@@ -100,9 +99,10 @@
 //!
 //! Trait synonyms for `Fn[…]`-trait bounds of functions returning futures.
 //!
-//! E.g. a 2-argument function `async fn foo(x: Bar, y: Baz) -> Qux` will implement `AsyncFn2<Bar, Baz, Output = Qux>`.
+//! E.g. a 2-argument function `async fn foo(x: Bar, y: Baz) -> Qux` will implement
+//! <code>[AsyncFn2]<Bar, Baz, Output = Qux></code>.
 //!
-//! _TODO: this crate is still undocumented._
+//! _TODO: this crate is still not fully documented._
 
 use core::future::Future;
 use paste::paste;
@@ -122,10 +122,29 @@ macro_rules! define_async_fn_traits {
     };
     ([$($FNTYPE:ident)?][$($I:literal)*] $N:literal $($J:literal)*) => {
         paste!{
+            #[doc = "A synonym for future-returning `Fn"$($FNTYPE)?"`-bounds with "$N" arguments"]
+            #[doc = ""]
+            #[doc = "The bound"]
+            #[doc = "```no_run"]
+            #[doc = "# use async_fn_traits::*;"]
+            #[doc = "# fn _f<F: ?Sized, R, "$([<Arg $I>])", "*">() where"]
+            #[doc = "F: AsyncFn"$($FNTYPE)?$N"<"$([<Arg $I>]", ")*"Output = R>"]
+            #[doc = "# {}"]
+            #[doc = "```"]
+            #[doc = "is equivalent to something like"]
+            #[doc = "```no_run"]
+            #[doc = "# use core::future::Future;"]
+            #[doc = "# fn _f<F: ?Sized, Fut, R, "$([<Arg $I>])", "*">() where"]
+            #[doc = "F: Fn"$($FNTYPE)?"("$([<Arg $I>])", "*") -> Fut,"]
+            #[doc = "Fut: Future<Output = R>,"]
+            #[doc = "# {}"]
+            #[doc = "```"]
             pub trait [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*>
                 : [<Fn $($FNTYPE)?>]($([<Arg $I>]),*) -> <Self as [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*>>::OutputFuture
             {
+                #[allow(missing_docs)]
                 type OutputFuture: Future<Output = <Self as [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*>>::Output>;
+                #[allow(missing_docs)]
                 type Output;
             }
             impl<F: ?Sized, Fut, $([<Arg $I>]),*> [<AsyncFn $($FNTYPE)? $N>]<$([<Arg $I>]),*> for F
@@ -144,5 +163,4 @@ macro_rules! define_async_fn_traits {
     ([$($FNTYPE:ident)?][$($I:literal)*]) => {};
 }
 
-define_async_fn_traits!(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-    17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32);
+define_async_fn_traits!(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15);
