@@ -1,19 +1,20 @@
-# template_crate
+# async_fn_traits
 
-[![docs.rs]](https://docs.rs/template_crate)
-[![crates.io]](https://crates.io/crates/template_crate)
-[![github]](https://github.com/steffahn/template_crate)
+[![docs.rs]](https://docs.rs/async_fn_traits)
+[![crates.io]](https://crates.io/crates/async_fn_traits)
+[![github]](https://github.com/steffahn/async_fn_traits)
 [![MIT / Apache 2.0 licensed]](#License)
 [![unsafe forbidden]](https://github.com/rust-secure-code/safety-dance/)
 
-[github]: https://img.shields.io/badge/github-steffahn/template__crate-yellowgreen.svg
-[crates.io]: https://img.shields.io/crates/v/template_crate.svg
-[MIT / Apache 2.0 licensed]: https://img.shields.io/crates/l/template_crate.svg
-[docs.rs]: https://docs.rs/template_crate/badge.svg
+[github]: https://img.shields.io/badge/github-steffahn/async__fn__traits-yellowgreen.svg
+[crates.io]: https://img.shields.io/crates/v/async_fn_traits.svg
+[MIT / Apache 2.0 licensed]: https://img.shields.io/crates/l/async_fn_traits.svg
+[docs.rs]: https://docs.rs/async_fn_traits/badge.svg
 [unsafe forbidden]: https://img.shields.io/badge/unsafe-forbidden-success.svg
 
+Trait synonyms for `Fn[…]`-trait bounds returning futures.
 
-README documentation goes here!!
+_TODO: this crate is still undocumented._
 
 ## License
 Licensed under either of

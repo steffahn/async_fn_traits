@@ -85,15 +85,64 @@
     rustdoc::invalid_html_tags
 )]
 
-//! [![crates.io]](https://crates.io/crates/template_crate)
-//! [![github]](https://github.com/steffahn/template_crate)
-//! [![MIT / Apache 2.0 licensed]](https://github.com/steffahn/template_crate#License)
+//! [![crates.io]](https://crates.io/crates/async_fn_traits)
+//! [![github]](https://github.com/steffahn/async_fn_traits)
+//! [![MIT / Apache 2.0 licensed]](https://github.com/steffahn/async_fn_traits#License)
 //! [![unsafe forbidden]](https://github.com/rust-secure-code/safety-dance/)
 //!
 //! Module-level documentation goes here!!
 //!
-//! [github]: https://img.shields.io/badge/github-steffahn/template__crate-yellowgreen.svg
-//! [crates.io]: https://img.shields.io/crates/v/template_crate.svg
-//! [MIT / Apache 2.0 licensed]: https://img.shields.io/crates/l/template_crate.svg
-//! [docs.rs]: https://docs.rs/template_crate/badge.svg
+//! [github]: https://img.shields.io/badge/github-steffahn/async__fn__traits-yellowgreen.svg
+//! [crates.io]: https://img.shields.io/crates/v/async_fn_traits.svg
+//! [MIT / Apache 2.0 licensed]: https://img.shields.io/crates/l/async_fn_traits.svg
+//! [docs.rs]: https://docs.rs/async_fn_traits/badge.svg
 //! [unsafe forbidden]: https://img.shields.io/badge/unsafe-forbidden-success.svg
+//!
+//! Trait synonyms for `Fn[…]`-trait bounds of functions returning futures.
+//!
+//! E.g. a 2-argument function `async fn foo(x: Bar, y: Baz) -> Qux` will implement `AsyncFn2<Bar, Baz, Output = Qux>`.
+//!
+//! _TODO: this crate is still undocumented._
+
+use core::future::Future;
+use paste::paste;
+
+#[allow(clippy::missing_docs_in_private_items)]
+macro_rules! define_async_fn_traits {
+    ($($J:literal)+) => {
+        define_async_fn_traits!{
+            [Once][] $($J)+
+        }
+        define_async_fn_traits!{
+            [Mut][] $($J)+
+        }
+        define_async_fn_traits!{
+            [][] $($J)+
+        }
+    };
+    ([$($FNTYPE:ident)?][$($I:literal)*] $N:literal $($J:literal)*) => {
+        paste!{
+            trait [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*>
+                : [<Fn $($FNTYPE)?>]($([<Arg $I>]),*) -> <Self as [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*>>::OutputFuture
+            {
+                type OutputFuture: Future<Output = <Self as [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*>>::Output>;
+                type Output;
+            }
+            impl<F: ?Sized, Fut, $([<Arg $I>]),*> [<Fn $($FNTYPE)? Async $N>]<$([<Arg $I>]),*> for F
+            where
+                F: [<Fn $($FNTYPE)?>]($([<Arg $I>]),*) -> Fut,
+                Fut: Future,
+            {
+                type OutputFuture = Fut;
+                type Output = Fut::Output;
+            }
+        }
+        define_async_fn_traits!{
+            [$($FNTYPE)?][$($I)* $N] $($J)*
+        }
+    };
+    ([$($FNTYPE:ident)?][$($I:literal)*]) => {};
+}
+
+define_async_fn_traits!(0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+    17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32);

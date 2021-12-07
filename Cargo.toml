@@ -1,14 +1,14 @@
 [package]
-name = "template_crate"
+name = "async_fn_traits"
 version = "0.0.0"
 authors = ["Frank Steffahn <fdsteffahn@gmail.com>"]
 license = "MIT OR Apache-2.0"
 description = """
 Description goes here!!
 """
-repository = "https://github.com/steffahn/template_crate"
-homepage = "https://github.com/steffahn/template_crate"
-documentation = "https://docs.rs/template_crate"
+repository = "https://github.com/steffahn/async_fn_traits"
+homepage = "https://github.com/steffahn/async_fn_traits"
+documentation = "https://docs.rs/async_fn_traits"
 keywords = []
 categories = ["no-std"]
 readme = "README.md"
@@ -17,3 +17,4 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+paste = "1.0.6"
