@@ -103,7 +103,7 @@
 //! E.g. a 2-argument function `async fn foo(x: Bar, y: Baz) -> Qux` will implement
 //! <code>[AsyncFn2]<Bar, Baz, Output = Qux></code>.
 //!
-//! _TODO: this crate is still not fully documented._
+//! _TODO: This crate-level documentation is missing some code examples._
 
 use core::future::Future;
 use paste::paste;
