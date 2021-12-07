@@ -84,6 +84,7 @@
     rustdoc::private_doc_tests,
     rustdoc::invalid_html_tags
 )]
+// false positives in `<code>` blocks
 #![allow(clippy::doc_markdown)]
 
 //! [![crates.io]](https://crates.io/crates/async_fn_traits)
